@@ -65,7 +65,7 @@ export async function changePassword(
     res: Response
 ): Promise<void> {
     const { oldPassword, newPassword } = req.body;
-    
+
     if (newPassword.length < 8) {
         res.status(400).json({
             error: "Password must be at least 8 characters long",
@@ -79,7 +79,7 @@ export async function changePassword(
         });
         return;
     }
-    const userId = (req as Request & { user: Pick<User, "id"> }).user.id;
+    const userId = (req as Request & { user: Pick<User, "id"> }).user?.id;
 
     try {
         const success = await authService.changePassword(

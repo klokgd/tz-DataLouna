@@ -1,0 +1,6 @@
+CREATE TABLE purchases (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    product_id INT REFERENCES products(id) ON DELETE CASCADE,
+    purchased_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
