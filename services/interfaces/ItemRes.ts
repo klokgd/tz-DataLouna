@@ -1,4 +1,4 @@
-export interface ItemExRes {
+export interface ItemRes {
     market_hash_name: string;
     currency: string;
     suggested_price: number;

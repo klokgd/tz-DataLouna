@@ -1,9 +1,9 @@
 import axios from "axios";
 import redisClient from "../config/redis";
-import { ItemExRes } from "./interfaces/itemExResInteface";
-import { ItemInRes } from "./interfaces/itemInResInterface";
+import { ItemRes } from "./interfaces/ItemRes";
+import { MinPrice } from "../models/minPriceModel";
 
-export async function getMinPrices(): Promise<ItemInRes[]> {
+export async function getMinPrices(): Promise<MinPrice[]> {
     const cacheKey = "min_prices";
     const cachedData = await redisClient.get(cacheKey);
 
@@ -14,13 +14,13 @@ export async function getMinPrices(): Promise<ItemInRes[]> {
         process.env.SKINPORT_API_URL ?? "https://api.skinport.com/v1/items";
         
     try {
-        const tradableResponse = await axios.get<ItemExRes[]>(url, {
+        const tradableResponse = await axios.get<ItemRes[]>(url, {
             params: {
                 tradable: true,
             },
         });
 
-        const nonTradableResponse = await axios.get<ItemExRes[]>(url);
+        const nonTradableResponse = await axios.get<ItemRes[]>(url);
 
         const tradableItems = tradableResponse.data;
         const nonTradableItems = nonTradableResponse.data;

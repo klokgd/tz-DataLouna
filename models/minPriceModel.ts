@@ -1,4 +1,4 @@
-export interface ItemInRes {
+export interface MinPrice {
     name: string,
     prices: {
         tradable: number | null,
